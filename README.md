@@ -4,7 +4,8 @@ Student Name: Tafadzwa hove
 Group Number: Group 9 
 
 Title: AI-Driven Malaria Detection: Developing a Convolutional Neural Network for Blood Smear Analysis  
-ABSTRACT 
+
+## ABSTRACT 
 
 Malaria remains one of the most significant public health challenges globally, particularly in sub-Saharan Africa. According to the World Health Organization (WHO), there were an estimated 249 million malaria cases and 608,000 deaths worldwide in 2022, with Africa accounting for approximately 94% of all cases and 95% of deaths (WHO, 2023). Zimbabwe, where this project draws its contextual motivation, experiences substantial malaria burden, with transmission occurring primarily in rural and resource-limited areas where diagnostic infrastructure is often inadequate. 
 
@@ -15,7 +16,7 @@ Artificial intelligence, particularly deep learning approaches such as convoluti
 This research project aims to develop a lightweight, efficient CNN-based system for automated malaria detection from blood smear images. The primary objective is to create a model that maintains high diagnostic accuracy while being computationally efficient enough to run on basic computer systems.  By leveraging transfer learning with MobileNetV2 a model specifically designed for mobile and edge deploymentwe seek to balance performance with accessibility. This progress report details the work completed to date, including literature review findings, dataset preparation, methodology development, and plans for future project stages
 3. Methodology 
 
-3.1 Project Approach 
+## 3.1 Project Approach 
 
 This project follows a structured machine learning development lifecycle, encompassing data acquisition, preprocessing, model development, training, evaluation, and interpretation. The approach prioritizes simplicity and computational efficiency without compromising diagnostic accuracy. 
 
@@ -39,7 +40,7 @@ Output Layer: Single neuron with sigmoid activation for binary classification (i
 
 Rationale for Architecture Choices: MobileNetV2 was selected specifically because it is designed for mobile and edge deployment. Its depthwise separable convolutions require significantly fewer computations than standard convolutions, making it ideal for resource-limited settings. The 128×128 input size further reduces computational demands while prior research suggests this resolution is adequate for detecting Plasmodium parasites (Quinn et al., 2016). 
 
-3.3 Training Strategy 
+## 3.3 Training Strategy 
 
 Optimizer: Adam optimizer with default learning rate (0.001). Adam adapts learning rates per parameter and has shown strong performance across diverse deep learning tasks. 
 
@@ -57,7 +58,7 @@ ModelCheckpoint: Saves the best model based on validation loss
 
 Epochs: Maximum 20 epochs, though early stopping likely to halt training earlier. 
 
-3.4 Data Augmentation 
+## 3.4 Data Augmentation 
 
 To improve model generalization and artificially expand the training dataset, I will apply the following augmentations during training: 
 
@@ -73,7 +74,7 @@ Horizontal flip
 
 These augmentations simulate the natural variation present in real-world blood smear images, helping the model learn invariant features of parasites regardless of orientation or position. Importantly, validation and test data receive only rescaling  to provide unbiased performance estimates. 
 
-3.5 Evaluation Strategy 
+## 3.5 Evaluation Strategy 
 
 Model performance will be assessed using: 
 
@@ -92,4 +93,6 @@ Classification reports will provide detailed perclass metrics, and the confusion
 
 ## Project Presentation Video
 [Watch the presentation on YouTube](https://youtu.be/5OyJY8X_II8)
+## Data set
+https://drive.google.com/file/d/1XrfrHbInDPQitpY5YwjsDxEjruxmOz-m/view?usp=sharing
 
