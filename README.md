@@ -1,4 +1,4 @@
- # AI-Health-Research-Project
+ # AI in Healthcare Prroject
 Student Name: Tafadzwa hove 
 
 Group Number: Group 9 
