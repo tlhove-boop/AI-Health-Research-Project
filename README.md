@@ -20,57 +20,57 @@ This research project aims to develop a lightweight, efficient CNN-based system 
 
 This project follows a structured machine learning development lifecycle, encompassing data acquisition, preprocessing, model development, training, evaluation, and interpretation. The approach prioritizes simplicity and computational efficiency without compromising diagnostic accuracy. 
 
-3.2 Model Architecture: Transfer Learning with MobileNetV2 
+## 3.2 Model Architecture: Transfer Learning with MobileNetV2 
 
 The core of our system is a convolutional neural network built using transfer learning with the MobileNetV2 architecture. Our specific implementation includes: 
 
-Base Model: MobileNetV2 pre-trained on ImageNet, with weights frozen during initial training. The include_top=False parameter removes the original classification layer, allowing us to add custom layers tailored to our binary classification task. 
+ **Base Model** : MobileNetV2 pre-trained on ImageNet, with weights frozen during initial training. The include_top=False parameter removes the original classification layer, allowing us to add custom layers tailored to our binary classification task. 
 
-Input Shape: Images resized to 128×128 pixels with three color channels (RGB). This resolution balances detail preservation with computational efficiency, reducing memory requirements compared to the 224×224 input typically used with MobileNetV2. 
+**Input Shape:** Images resized to 128×128 pixels with three color channels (RGB). This resolution balances detail preservation with computational efficiency, reducing memory requirements compared to the 224×224 input typically used with MobileNetV2. 
 
-Custom Top Layers: 
+**Custom Top Layers:** 
 
-Global Average Pooling 2D: Reduces each feature map to a single value, dramatically reducing parameters compared to flattening 
+- Global Average Pooling 2D: Reduces each feature map to a single value, dramatically reducing parameters compared to flattening 
 
-Dense Layer: 128 neurons with ReLU activation for learning task-specific features 
+- Dense Layer: 128 neurons with ReLU activation for learning task-specific features 
 
-Dropout Layer: 0.5 dropout rate to prevent overfitting 
+- Dropout Layer: 0.5 dropout rate to prevent overfitting 
 
-Output Layer: Single neuron with sigmoid activation for binary classification (infected vs. uninfected) 
+- Output Layer: Single neuron with sigmoid activation for binary classification (infected vs. uninfected) 
 
-Rationale for Architecture Choices: MobileNetV2 was selected specifically because it is designed for mobile and edge deployment. Its depthwise separable convolutions require significantly fewer computations than standard convolutions, making it ideal for resource-limited settings. The 128×128 input size further reduces computational demands while prior research suggests this resolution is adequate for detecting Plasmodium parasites (Quinn et al., 2016). 
+**Rationale for Architecture Choices:** MobileNetV2 was selected specifically because it is designed for mobile and edge deployment. Its depthwise separable convolutions require significantly fewer computations than standard convolutions, making it ideal for resource-limited settings. The 128×128 input size further reduces computational demands while prior research suggests this resolution is adequate for detecting Plasmodium parasites (Quinn et al., 2016). 
 
 ## 3.3 Training Strategy 
 
-Optimizer: Adam optimizer with default learning rate (0.001). Adam adapts learning rates per parameter and has shown strong performance across diverse deep learning tasks. 
+**Optimizer:** Adam optimizer with default learning rate (0.001). Adam adapts learning rates per parameter and has shown strong performance across diverse deep learning tasks. 
 
-Loss Function: Binary cross-entropy, appropriate for two-class classification problems. 
+**Loss Function:** Binary cross-entropy, appropriate for two-class classification problems. 
 
-Metrics: Accuracy, precision, and recall will be tracked during training. Recall is particularly important in medical diagnostics to minimize false negatives. 
+**Metrics:** Accuracy, precision, and recall will be tracked during training. Recall is particularly important in medical diagnostics to minimize false negatives. 
 
-Callbacks: 
+**Callbacks:** 
 
-EarlyStopping: Monitors validation loss and stops training if no improvement for 5 epochs, restoring the best weights 
+- EarlyStopping: Monitors validation loss and stops training if no improvement for 5 epochs, restoring the best weights 
 
-ReduceLROnPlateau: Reduces learning rate by factor of 0.2 when validation loss plateaus for 3 epochs 
+- ReduceLROnPlateau: Reduces learning rate by factor of 0.2 when validation loss plateaus for 3 epochs 
 
-ModelCheckpoint: Saves the best model based on validation loss 
+- ModelCheckpoint: Saves the best model based on validation loss 
 
-Epochs: Maximum 20 epochs, though early stopping likely to halt training earlier. 
+- Epochs: Maximum 20 epochs, though early stopping likely to halt training earlier. 
 
 ## 3.4 Data Augmentation 
 
 To improve model generalization and artificially expand the training dataset, I will apply the following augmentations during training: 
 
-Rotation range: ±20 degrees 
+- Rotation range: ±20 degrees 
 
-Width and height shifts: ±20% 
+- Width and height shifts: ±20% 
 
-Shear transformations: ±20% 
+- Shear transformations: ±20% 
 
-Zoom range: ±20% 
+- Zoom range: ±20% 
 
-Horizontal flip 
+- Horizontal flip 
 
 These augmentations simulate the natural variation present in real-world blood smear images, helping the model learn invariant features of parasites regardless of orientation or position. Importantly, validation and test data receive only rescaling  to provide unbiased performance estimates. 
 
@@ -78,15 +78,15 @@ These augmentations simulate the natural variation present in real-world blood s
 
 Model performance will be assessed using: 
 
-Accuracy: Overall proportion of correct predictions 
+- Accuracy: Overall proportion of correct predictions 
 
-Precision: Proportion of positive identifications that are correct (important for avoiding unnecessary treatment) 
+- Precision: Proportion of positive identifications that are correct (important for avoiding unnecessary treatment) 
 
-Recall: Proportion of actual positives correctly identified (critical for detecting infections) 
+- Recall: Proportion of actual positives correctly identified (critical for detecting infections) 
 
-F1-Score: Harmonic mean of precision and recall 
+- F1-Score: Harmonic mean of precision and recall 
 
-Confusion Matrix: Visual representation of true vs. predicted classifications, showing false positives and false negatives 
+- Confusion Matrix: Visual representation of true vs. predicted classifications, showing false positives and false negatives 
 
 Classification reports will provide detailed perclass metrics, and the confusion matrix will be visualized as a heatmap for clarity. 
 
