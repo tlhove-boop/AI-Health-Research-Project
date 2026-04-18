@@ -96,3 +96,6 @@ Classification reports will provide detailed perclass metrics, and the confusion
 ## Data set
 https://drive.google.com/file/d/1XrfrHbInDPQitpY5YwjsDxEjruxmOz-m/view?usp=sharing
 
+## Code Execution 
+https://colab.research.google.com/drive/1QsB3i2ByNS35yk1-1SSEhZ9AOhJepAwq?usp=sharing
+
